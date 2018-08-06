@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono');
+$monoFont: 'Roboto Mono', monospace;
+$sansFont: 'Roboto', sans-serif;
+
+//$wall: #012727; // dark slate gray
+$wall: #0D4D4D;
+$fogOfWar: #151818; // darker slate gray
+$floor: #D3CCC6; // light gray
+$player: #009999; // turquoise blue
+$enemy: #FF0000; // red
+$treasure: #00CC00; // green
+$weapon: #FF7400; // orange
+$exit: #CD0074; // purple
+$boss: #8C0953; // darker purple
+$bgGreen: #5CC45C; // pastel green
+$bgRed: #F57373; // pastel red
+
+$squareSize: 16px;
+$sidebarWidth: $squareSize * 11;
+$buttonSize: 32px;
+
+body {
+  background: $fogOfWar;
+  color: $floor;
+}
+
+.gameGoesHere {
+  margin: auto;
+  width: fit-content;
+  z-index: 0;
+  font-family: $monoFont;
+  overflow: hidden;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: minmax(auto, $sidebarWidth) auto auto;
+  grid-template-areas:
+    ". levelInfo ."
+    "playerStats map gameInfo"
+    "log map controlPad"
+    ". footer .";
+}
+.levelInfo {
+  grid-area: levelInfo;
+}
+.map {
+  grid-area: map;
+}
+.playerStats {
+  grid-area: playerStats;
+  font-size: 0.7rem;
+  table {
+    border: 1px solid black;
+    border-radius: 10px;
+  }
+}
+.log {
+  grid-area: log;
+  font-size: 0.7rem;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  .GOODLOG {
+    background: $bgGreen;
+    color: black;
+    border: 1px solid black;
+    padding: 1px;
+  }
+  .BADLOG {
+    background: $bgRed;
+    color: black;
+    border: 1px solid black;
+    padding: 1px;
+  }
+}
+.gameInfo {
+  grid-area: gameInfo;
+  button {
+    width: $buttonSize;
+    height: $buttonSize;
+  }
+}
+.controlPad {
+  grid-area: controlPad;
+  padding: 10px;
+  height: 132px;
+  display: grid;
+  grid-template-rows: 34px 34px 34px;
+  grid-gap: 0px;
+  grid-template-areas:
+    "tL tM tR"
+    "mL mM mR"
+    "bL bM bR";
+  .cpSquare {
+    width: 32px;
+    height: 32px;
+  }
+  #cpTopMid, #cpMidLeft, #cpMidMid, #cpMidRight, #cpBotMid {
+    background: $floor;
+    border: 1px solid black;
+  }
+
+}
+.footer {
+  grid-area: footer;
+  font-family: $sansFont;
+  font-size: 0.5rem;
+  text-align: right;
+  a {
+    color: $floor;
+    text-decoration: none;
+  }
+}
+
+.header {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.modal {
+  display: none;
+  z-index: 1;
+  color: black;
+  .modalBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+  }
+  .modalContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    background: $floor;
+    border: 2px solid $wall;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    .leftColumn {
+      display: inline-block;
+      width: 45%;
+      left: 0;
+    }
+    .rightColumn {
+      display: inline-block;
+      width: 45%;
+      right: 0;
+    }
+    table {
+      margin: auto;
+    }
+  }
+}
+
+
+.row, .square {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  height: $squareSize;
+}
+
+.square {
+  display: inline-block;
+  width: $squareSize;
+  background: $fogOfWar;
+}
+
+.FLOOR {
+  background: $floor;
+}
+
+.WALL {
+  background: $wall;
+}
+
+.PLAYER {
+  background: $player;
+}
+.PLAYERfaker {
+  @extend .PLAYER;
+}
+
+.ENEMY {
+  background: $enemy;
+}
+.ENEMYfaker {
+  @extend .ENEMY;
+}
+
+.TREASURE {
+  background: $treasure;
+}
+.TREASUREfaker {
+  @extend .TREASURE;
+}
+
+.WEAPON {
+  background: $weapon;
+}
+.WEAPONfaker {
+  @extend .WEAPON;
+}
+
+.EXIT {
+  background: $exit;
+}
+.EXITfaker {
+  @extend .EXIT;
+}
+
+.BOSS {
+  display: inline-block;
+  width: $squareSize - 4px;
+  height: $squareSize - 4px;
+  background: $boss;
+  border: 2px solid black;
+}
+.BOSSfaker {
+  @extend .BOSS;
+}
+
+
+@media screen and (max-width: 849px) {
+  $squareSize: 10px;
+  $sidebarWidth: 500px;
+
+  .header {
+    font-size: 1rem;
+  }
+
+  .gameGoesHere {
+    width: 100%;
+    overflow: auto;
+    grid-template-columns: auto auto auto;
+    grid-template-areas:
+      "levelInfo levelInfo gameInfo"
+      "map map controlPad"
+      "map map controlPad"
+      "playerStats log log"
+      ". . footer";
+    }
+
+  .controlPad {
+    padding: 10px 0px 0px 0px;
+  }
+
+  .modalContent{
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 95%;
+    height: 95%;
+    overflow: scroll;
+  }
+
+} // end 'normal' phone media query
+
+// media query for landscape
+@media screen and (max-width: 849px) and (orientation: landscape) {
+  .gameGoesHere {
+    grid-template-columns: minmax(auto, 33%) auto auto;
+    grid-template-areas:
+      ".levelInfo ."
+      "playerStats map gameInfo"
+      "log map controlPad"
+      ". . footer";
+    }
+
+  .controlPad {
+    justify-content: center;
+  }
+}
