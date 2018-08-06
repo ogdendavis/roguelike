@@ -1183,7 +1183,7 @@ class Map extends React.Component {
         enemy.classList.add('ENEMY')
       }
     });
-
+    
     const boss = document.getElementById(this.props.boss);
     if (visible.indexOf(this.props.boss) != -1 && boss) {
       boss.classList.add('BOSS');

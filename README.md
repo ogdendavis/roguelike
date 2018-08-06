@@ -1,5 +1,7 @@
 This roguelike game was built for the Free Code Camp project at https://learn.freecodecamp.org/coding-interview-prep/take-home-projects/build-a-roguelike-dungeon-crawler-game/
 
-The game is built with React/Redux, and styled using SCSS.
+The game is built with React/Redux and JSX, and styled using SCSS. It was originally built in CodePen at https://codepen.io/ogdendavis/full/MVxBjb/
 
-The challenge for me in porting this over from CodePen to GitHub is going to be in figuring out how to properly set up the React/Redux -- in CodePen, I just had to select a pre-processor and it was good to go! I could just copy the processed code into this project, but I want to try to actually set it up to work with the code I wrote.
+The main modifications I made to this project to bring it off of CodePen were updating index.html to include basic HTML structure and links to the stylesheet and scripts.
+
+I stuck with using the link to JSX instead of using Babel as a preprocessor because I'm not really worried about a slower load time on this page, and my focus was on getting a working demo independent of CodePen. Updating the project to include this is left as an exercise for the future!
