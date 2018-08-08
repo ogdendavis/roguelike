@@ -60,6 +60,7 @@ body {
 .gameInfo button {
   width: 32px;
   height: 32px;
+  padding: 0;
 }
 
 .controlPad {
@@ -70,6 +71,7 @@ body {
   grid-template-rows: 34px 34px 34px;
   grid-gap: 0px;
   grid-template-areas: "tL tM tR" "mL mM mR" "bL bM bR";
+  width: 102px;
 }
 .controlPad .cpSquare {
   width: 32px;
