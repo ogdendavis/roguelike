@@ -5,6 +5,7 @@ Possible future updates:
 - General clean-up of code (particularly CSS)
 - Gameplay balance tweaks (enemy health, leveling up, etc) to make it still challenging but more even throughout levels (right now, you level up a ton at higher levels and hardly at all on level 1)
 - Map property tweaks to make it a little more spread out than current algorithm (play with allowed overlap in room builder, and globalMapProperties)
+- Complicate the game by making enimies become 'active' when player gets close, so that they start to move
 */
 
 //global "behind-the-scenes" settings that don't change in gameplay
@@ -456,7 +457,7 @@ const playerMove = (dir) => {
   const nextSpace = `${testX}x${testY}`;
 
   // walking into walls
-  if (floors.indexOf(nextSpace) == -1) {
+  if (floors.indexOf(nextSpace) === -1) {
     return ({
       type: PLAYERMOVE,
       player: player,
@@ -467,7 +468,7 @@ const playerMove = (dir) => {
   }
 
   // picking up treasure
-  if (treasures.indexOf(nextSpace) != -1) {
+  if (treasures.indexOf(nextSpace) !== -1) {
     const healthGain = level * globalGameProperties.treasureHealth;
     const newHealth = state.playerStats.health + healthGain;
     return ({
@@ -487,7 +488,7 @@ const playerMove = (dir) => {
   }
 
   // picking up weapon
-  if (weapons.indexOf(nextSpace) != -1) {
+  if (weapons.indexOf(nextSpace) !== -1) {
     const newPower = state.playerStats.power + globalGameProperties.weaponPower;
     const mopUpgrades = ['a better mop head', 'an ergonomic handle', 'a self-propelling mop', 'a better bucket', 'a titanium mop stick', 'a two-headed mop', 'a sentient wizard mop like the brooms in Harry Potter', 'a stick of gum. No idea why this helps.', 'a sparkly disco ball for the top of your mop']
     let upgradeSeed = Math.floor(Math.random()*mopUpgrades.length);
@@ -509,7 +510,7 @@ const playerMove = (dir) => {
   }
 
   // fighting an enemy
-  if (enemies.indexOf(nextSpace) != -1) {
+  if (enemies.indexOf(nextSpace) !== -1) {
     const playerHealth = state.playerStats.health;
     const playerLevel = state.playerStats.level;
     const playerPower = state.playerStats.power;
@@ -601,7 +602,7 @@ const playerMove = (dir) => {
   } // end fight
 
   // fighting the boss
-  if (nextSpace == boss) {
+  if (nextSpace === boss) {
     const playerHealth = state.playerStats.health;
     const playerLevel = state.playerStats.level;
     const playerPower = state.playerStats.power;
@@ -626,7 +627,7 @@ const playerMove = (dir) => {
     // if player defeats boss
     else if (newBossHealth <= 0) {
       alert('You\'ve defeated evil, messy doctor! You win!');
-      return reset(0);
+      return reset();
     }
     // if neither boss nor player dies
     return ({ // if neither player nor enemy dies
@@ -1183,7 +1184,7 @@ class Map extends React.Component {
         enemy.classList.add('ENEMY')
       }
     });
-    
+
     const boss = document.getElementById(this.props.boss);
     if (visible.indexOf(this.props.boss) != -1 && boss) {
       boss.classList.add('BOSS');
