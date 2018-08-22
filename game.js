@@ -1328,7 +1328,7 @@ class Map extends React.Component {
 const Footer = () => {
   return (
     <div className = "footer">
-      <span id = "signed">A <a href = "https://www.freecodecamp.org/" target = "_blank">FCC</a> pen by <a href = "https://codepen.io/ogdendavis/" target = "_blank">Lucas</a></span>
+      <span id = "signed">A project by <a href = "https://github.com/ogdendavis" target = "_blank">Lucas</a></span>
     </div>
   );
 }

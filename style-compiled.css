@@ -5,8 +5,9 @@ body {
 }
 
 .gameGoesHere {
-  margin: auto;
+  margin: 50px auto;
   width: fit-content;
+  width: -moz-fit-content;
   z-index: 0;
   font-family: "Roboto Mono", monospace;
   overflow: hidden;
@@ -56,6 +57,7 @@ body {
 
 .gameInfo {
   grid-area: gameInfo;
+  text-align: right;
 }
 .gameInfo button {
   width: 32px;
